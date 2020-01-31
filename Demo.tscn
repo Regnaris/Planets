@@ -35,3 +35,5 @@ fov = 35.0
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 3 )
 material/0 = null
+
+[node name="Tween" type="Tween" parent="."]

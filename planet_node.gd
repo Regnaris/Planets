@@ -15,7 +15,7 @@ func _enter_tree():
 
 
 func _process(delta):
-	for lod_level in range(PlanetGen.MAX_LOD):
+	for lod_level in range(PlanetGen.MAX_LOD + 1):
 		if surface_meshes[lod_level].mesh != null:
 			_cur_lod = lod_level
 	for mesh_inst in surface_meshes:
@@ -24,7 +24,7 @@ func _process(delta):
 
 
 func _ready():
-	for lod_level in range(PlanetGen.MAX_LOD + 1):
+	for lod_level in range(PlanetGen.MAX_LOD):
 		request_lod(lod_level)
 
 
