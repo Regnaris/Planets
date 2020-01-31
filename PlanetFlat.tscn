@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="SphereMesh" id=1]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type spatial;
+
+const bool test = false;
+
+uniform sampler2D heightmap;
+uniform float water_level : hint_range(0.0, 1.0) = 0.2;
+uniform vec4 water_color : hint_color;
+uniform vec4 ground_color : hint_color;
+
+void fragment() {
+	float height = texture(heightmap, UV).r;
+	if (test) {
+		ALBEDO.rgb = vec3(height, height, height);
+	} else {
+		if (height > water_level) {
+			ALBEDO.rgb = ground_color.rgb;
+		} else {
+			ALBEDO.rgb = water_color.rgb;
+		}
+	}
+}"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+period = 126.1
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 2 )
+shader_param/water_level = 0.506
+shader_param/water_color = Color( 0.329412, 0.576471, 1, 1 )
+shader_param/ground_color = Color( 0.972549, 0.760784, 0.392157, 1 )
+shader_param/heightmap = SubResource( 4 )
+
+[node name="PlanetFlat" type="Spatial"]
+
+[node name="Mesh" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 5 )
+
+[node name="EditorDirLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.706465, -0.370124, 0.603254, 0, 0.852357, 0.52296, -0.707748, -0.369453, 0.60216, 0, 0, 0 )
+editor_only = true

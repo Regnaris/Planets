@@ -1,0 +1,33 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "Planet",
+"language": "GDScript",
+"path": "res://planet_node.gd"
+} ]
+_global_script_class_icons={
+"Planet": ""
+}
+
+[application]
+
+config/name="Planets"
+run/main_scene="res://Demo.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+PlanetGen="*res://planet_gen.gd"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
